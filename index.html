@@ -21,6 +21,16 @@ color:white;
 overflow:hidden;
 }
 
+/* ===== SCROLL FIX ===== */
+body.lock{
+overflow:hidden;
+}
+
+body.scroll{
+overflow-y:auto;
+overflow-x:hidden;
+}
+
 /* ===== BACKGROUND ===== */
 .overlay{
 position:fixed;
@@ -167,7 +177,7 @@ opacity:0.7;
 </style>
 </head>
 
-<body>
+<body class="lock">
 
 <div class="overlay"></div>
 
@@ -211,6 +221,11 @@ if(p === "👈🏻🪐👉🏻"){
 document.getElementById("login").style.opacity="0";
 setTimeout(()=>document.getElementById("login").style.display="none",500);
 
+/* فتح التمرير */
+document.body.classList.remove("lock");
+document.body.classList.add("scroll");
+
+/* تشغيل الصوت */
 document.getElementById("audio").play().catch(()=>{});
 
 startTyping();
@@ -257,7 +272,6 @@ type();
 function love(){
 document.getElementById("final").style.display="block";
 
-/* shake effect */
 document.getElementById("page").style.transform="scale(1.02)";
 setTimeout(()=>document.getElementById("page").style.transform="scale(1)",200);
 
@@ -275,7 +289,7 @@ setTimeout(()=>h.remove(),2000);
 }
 }
 
-/* floating hearts animation */
+/* floating hearts */
 const style=document.createElement("style");
 style.innerHTML=`
 @keyframes float{
