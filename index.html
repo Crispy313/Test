@@ -21,16 +21,7 @@ color:white;
 overflow:hidden;
 }
 
-/* ===== BACKGROUND ===== */
-.overlay{
-position:fixed;
-width:100%;
-height:100%;
-background:radial-gradient(circle at center, rgba(255,77,109,0.15), rgba(0,0,0,0.85));
-z-index:-2;
-}
-
-/* ===== LOGIN (PRO DESIGN) ===== */
+/* ===== LOGIN ===== */
 #login{
 position:fixed;
 width:100%;
@@ -38,7 +29,7 @@ height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-background:rgba(0,0,0,0.8);
+background:rgba(0,0,0,0.85);
 backdrop-filter:blur(10px);
 z-index:999;
 }
@@ -52,12 +43,10 @@ background:rgba(255,255,255,0.08);
 backdrop-filter:blur(20px);
 box-shadow:0 0 50px rgba(255,77,109,0.3);
 text-align:center;
-animation:fade 1s ease;
 }
 
 .login-box h2{
 margin-bottom:20px;
-font-size:26px;
 color:#ffe5ec;
 }
 
@@ -65,10 +54,10 @@ color:#ffe5ec;
 width:100%;
 padding:15px;
 font-size:18px;
-border-radius:15px;
 border:none;
-outline:none;
+border-radius:15px;
 text-align:center;
+outline:none;
 margin-bottom:15px;
 }
 
@@ -93,9 +82,8 @@ background:rgba(255,255,255,0.07);
 backdrop-filter:blur(18px);
 box-shadow:0 0 60px rgba(255,77,109,0.25);
 text-align:center;
-animation:fade 2s ease;
 margin:80px auto;
-position:relative;
+animation:fade 2s ease;
 }
 
 @keyframes fade{
@@ -105,8 +93,8 @@ to{opacity:1;transform:translateY(0);}
 
 .title{
 font-size:62px;
-margin-bottom:15px;
 color:#ffe5ec;
+margin-bottom:15px;
 }
 
 .sub{
@@ -118,8 +106,8 @@ margin-bottom:35px;
 .text{
 font-size:27px;
 line-height:2.4;
-min-height:250px;
 white-space:pre-line;
+min-height:250px;
 }
 
 button{
@@ -131,11 +119,6 @@ font-size:24px;
 cursor:pointer;
 background:linear-gradient(45deg,#ff4d6d,#ff8fa3);
 color:white;
-transition:0.4s;
-}
-
-button:hover{
-transform:scale(1.08);
 }
 
 .hidden{
@@ -145,13 +128,6 @@ font-size:32px;
 color:#fff0f3;
 }
 
-.footer{
-margin-top:35px;
-font-size:16px;
-opacity:0.65;
-}
-
-/* scroll */
 .scroll{
 overflow:auto;
 height:100vh;
@@ -161,18 +137,15 @@ height:100vh;
 
 <body>
 
-<div class="overlay"></div>
-
 <!-- ===== LOGIN ===== -->
 <div id="login">
 <div class="login-box">
 <h2>اكتب كلمة السر</h2>
-<input type="password" id="pass" placeholder="••••••••">
+<input type="password" id="pass">
 <button onclick="check()">دخول</button>
 </div>
 </div>
 
-<!-- ===== MAIN ===== -->
 <div class="card" id="page">
 
 <div class="title">لأجلكِ فقط</div>
@@ -188,20 +161,10 @@ height:100vh;
 بس حبي إلج يظل ثابت 🫀
 </div>
 
-<div class="footer">
-Made with real feelings ✨
 </div>
 
-</div>
-
-<!-- ===== MUSIC ===== -->
-<div id="music" style="display:none;">
-<iframe id="yt"
-width="0" height="0"
-src=""
-allow="autoplay">
-</iframe>
-</div>
+<!-- ===== LOCAL AUDIO ===== -->
+<audio id="audio" src="ILove.mp4"></audio>
 
 <script>
 
@@ -213,11 +176,11 @@ if(p === "👈🏻🪐👉🏻"){
 document.getElementById("login").style.display="none";
 document.getElementById("page").classList.add("scroll");
 
-/* تشغيل الأغنية بطريقة مضمونة */
-document.getElementById("music").style.display="block";
-document.getElementById("yt").src =
-"https://www.youtube.com/embed/b2vxSfbuA8o?autoplay=1";
+/* تشغيل الصوت المحلي */
+let audio = document.getElementById("audio");
+audio.play().catch(()=>{});
 
+/* يبدأ النص */
 startTyping();
 }
 }
