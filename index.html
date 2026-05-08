@@ -21,17 +21,6 @@ color:white;
 overflow:hidden;
 }
 
-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-opacity:0.35;
-z-index:-3;
-}
-
 .overlay{
 position:fixed;
 width:100%;
@@ -82,7 +71,7 @@ font-size:18px;
 cursor:pointer;
 }
 
-/* ===== MAIN CARD (original style fixed) ===== */
+/* ===== CARD ===== */
 .card{
 width:92%;
 max-width:950px;
@@ -95,7 +84,6 @@ text-align:center;
 animation:fade 2s ease;
 margin:80px auto;
 position:relative;
-overflow:hidden;
 }
 
 @keyframes fade{
@@ -156,13 +144,12 @@ opacity:0.65;
 overflow:auto;
 height:100vh;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN (no hint at all) -->
+<!-- LOGIN -->
 <div id="login">
 <input type="password" id="pass" placeholder="">
 <button onclick="check()">دخول</button>
@@ -182,7 +169,7 @@ height:100vh;
 
 <div id="final" class="hidden">
 يمكن الدنيا كلها تتغير…  
-بس حبي الج ظل ثابت 🫀
+بس حبي إلك ظل ثابت 🫀
 </div>
 
 <div class="footer">
@@ -191,19 +178,29 @@ Made with real feelings ✨
 
 </div>
 
+<!-- 🎵 MUSIC -->
+<div id="music" style="display:none;">
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/b2vxSfbuA8o?autoplay=1"
+allow="autoplay">
+</iframe>
+</div>
+
 <script>
 
 /* ===== PASSWORD ===== */
 function check(){
 let p = document.getElementById("pass").value;
+
 if(p === "👈🏻🪐👉🏻"){
 document.getElementById("login").style.display="none";
 document.getElementById("page").classList.add("scroll");
+document.getElementById("music").style.display="block";
 startTyping();
 }
 }
 
-/* ===== SLOW TYPE ===== */
+/* ===== BEST TEXT (merged + improved) ===== */
 const text = `
 يمكن مو كل مرة عرفت أتصرف صح…  
 ويمكن مرات جرحت قلبچ بدون ما أقصد.
@@ -237,7 +234,7 @@ setTimeout(type,70);
 type();
 }
 
-/* ===== FINAL ===== */
+/* ===== FINAL BUTTON ===== */
 function reveal(){
 document.getElementById("final").style.display="block";
 }
