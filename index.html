@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>لأجلكِ فقط</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
@@ -21,7 +28,8 @@ color:white;
 overflow:hidden;
 }
 
-/* ===== SCROLL FIX ===== */
+/* ===== SCROLL ===== */
+
 body.lock{
 overflow:hidden;
 }
@@ -32,15 +40,44 @@ overflow-x:hidden;
 }
 
 /* ===== BACKGROUND ===== */
+
 .overlay{
 position:fixed;
 width:100%;
 height:100%;
-background:radial-gradient(circle at center, rgba(255,77,109,0.18), rgba(0,0,0,0.9));
+background:
+radial-gradient(circle at center,
+rgba(255,77,109,0.18),
+rgba(0,0,0,0.92));
 z-index:-2;
 }
 
+.stars{
+position:fixed;
+width:100%;
+height:100%;
+top:0;
+left:0;
+background:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size:60px 60px;
+opacity:0.12;
+animation:starsMove 90s linear infinite;
+z-index:-3;
+}
+
+@keyframes starsMove{
+from{
+transform:translateY(0);
+}
+to{
+transform:translateY(-500px);
+}
+}
+
 /* ===== LOGIN ===== */
+
 #login{
 position:fixed;
 width:100%;
@@ -48,10 +85,10 @@ height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-background:rgba(0,0,0,0.9);
-backdrop-filter:blur(10px);
-z-index:999;
-transition:0.5s;
+background:rgba(0,0,0,0.92);
+backdrop-filter:blur(12px);
+z-index:9999;
+transition:0.6s;
 }
 
 .login-box{
@@ -68,19 +105,19 @@ animation:fade 1s ease;
 
 .login-box input{
 width:100%;
-padding:14px;
+padding:15px;
 font-size:18px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 text-align:center;
-margin-bottom:12px;
 outline:none;
-background:rgba(255,255,255,0.9);
+background:rgba(255,255,255,0.92);
 }
 
 .login-box button{
 width:100%;
-padding:12px;
+padding:13px;
+margin-top:12px;
 border:none;
 border-radius:15px;
 background:linear-gradient(45deg,#ff4d6d,#ff8fa3);
@@ -95,11 +132,12 @@ transform:scale(1.03);
 }
 
 /* ===== CARD ===== */
+
 .card{
 width:92%;
-max-width:900px;
+max-width:950px;
 margin:70px auto 25px auto;
-padding:50px;
+padding:55px;
 border-radius:35px;
 background:rgba(255,255,255,0.07);
 backdrop-filter:blur(18px);
@@ -121,7 +159,7 @@ transform:translateY(0);
 }
 
 .title{
-font-size:clamp(32px,6vw,60px);
+font-size:clamp(34px,6vw,62px);
 color:#ffe5ec;
 margin-bottom:10px;
 }
@@ -132,8 +170,26 @@ opacity:0.8;
 margin-bottom:25px;
 }
 
+.cinematic{
+font-size:22px;
+opacity:0;
+margin-bottom:35px;
+animation:fadeCinema 3s forwards;
+}
+
+@keyframes fadeCinema{
+0%{
+opacity:0;
+transform:translateY(20px);
+}
+100%{
+opacity:0.85;
+transform:translateY(0);
+}
+}
+
 .text{
-font-size:clamp(18px,4vw,26px);
+font-size:clamp(18px,4vw,27px);
 line-height:2.4;
 white-space:pre-line;
 min-height:200px;
@@ -156,15 +212,18 @@ transform:scale(1.08);
 }
 
 /* ===== FINAL ===== */
+
 .hidden{
 display:none;
 margin-top:25px;
-font-size:28px;
+font-size:30px;
+line-height:2;
 color:#fff0f3;
 animation:fade 1s ease;
 }
 
-/* ===== HEART PULSE ===== */
+/* ===== HEART ===== */
+
 .heart{
 position:fixed;
 bottom:20px;
@@ -172,6 +231,7 @@ right:20px;
 font-size:30px;
 animation:pulse 1.5s infinite;
 opacity:0.7;
+z-index:50;
 }
 
 @keyframes pulse{
@@ -180,7 +240,8 @@ opacity:0.7;
 100%{transform:scale(1);}
 }
 
-/* ===== FLOAT HEARTS ===== */
+/* ===== FLOAT ===== */
+
 @keyframes float{
 from{
 transform:translateY(0);
@@ -192,10 +253,94 @@ opacity:0;
 }
 }
 
+/* ===== GALLERY ===== */
+
+.photo-gallery{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-top:45px;
+}
+
+.photo{
+width:220px;
+padding:12px;
+background:white;
+border-radius:18px;
+transform:rotate(-2deg);
+box-shadow:0 0 30px rgba(0,0,0,0.35);
+transition:0.4s;
+opacity:0;
+transform:translateY(40px);
+}
+
+.photo.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.photo:nth-child(2){
+transform:rotate(2deg);
+}
+
+.photo:nth-child(3){
+transform:rotate(-1deg);
+}
+
+.photo:hover{
+transform:scale(1.05);
+}
+
+.photo img{
+width:100%;
+display:block;
+border-radius:12px;
+}
+
+/* ===== SECRET ===== */
+
+.secret-box{
+margin-top:50px;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.secret-box.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.secret-message{
+display:none;
+margin-top:22px;
+font-size:25px;
+line-height:2;
+color:#ffe5ec;
+animation:fade 1s ease;
+}
+
+/* ===== DAYS ===== */
+
+.days-box{
+margin-top:45px;
+font-size:24px;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+.days-box.active{
+opacity:0.9;
+transform:translateY(0);
+}
+
 /* ===== MUSIC PLAYER ===== */
+
 .music-player{
 width:92%;
-max-width:900px;
+max-width:950px;
 margin:0 auto 60px auto;
 padding:20px;
 border-radius:28px;
@@ -259,7 +404,43 @@ margin-top:0;
 transform:scale(1.08);
 }
 
+/* ===== ENDING ===== */
+
+.ending{
+opacity:0;
+pointer-events:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:42px;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(10px);
+transition:1.5s;
+z-index:99999;
+text-align:center;
+padding:20px;
+}
+
+.show-ending{
+opacity:1;
+}
+
+/* ===== MOBILE ===== */
+
 @media(max-width:700px){
+
+.card{
+padding:35px 25px;
+}
+
+.photo{
+width:85%;
+}
 
 .music-player{
 padding:18px;
@@ -276,7 +457,20 @@ height:52px;
 font-size:20px;
 }
 
+.secret-message{
+font-size:21px;
 }
+
+.days-box{
+font-size:20px;
+}
+
+.ending{
+font-size:28px;
+}
+
+}
+
 </style>
 </head>
 
@@ -284,26 +478,83 @@ font-size:20px;
 
 <div class="overlay"></div>
 
+<div class="stars"></div>
+
 <!-- LOGIN -->
+
 <div id="login">
+
 <div class="login-box">
+
 <input type="password" id="pass" placeholder="">
-<button onclick="check()">دخول</button>
+
+<button onclick="check()">
+دخول
+</button>
+
 </div>
+
 </div>
 
 <!-- MAIN -->
+
 <div class="card" id="page">
 
-<div class="title">لأجلكِ فقط</div>
+<div class="title">
+لأجلكِ فقط
+</div>
 
 <div class="sub">
 هاي الرسالة مو مجرد كلام… هاي شعور
 </div>
 
+<div class="cinematic">
+هناك شخص… غير كل شيء ✨
+</div>
+
 <div class="text" id="typing"></div>
 
-<button onclick="love()">احبج 💗</button>
+<!-- PHOTOS -->
+
+<div class="photo-gallery">
+
+<div class="photo reveal">
+<img src="photo1.jpg">
+</div>
+
+<div class="photo reveal">
+<img src="photo2.jpg">
+</div>
+
+<div class="photo reveal">
+<img src="photo3.jpg">
+</div>
+
+</div>
+
+<!-- SECRET -->
+
+<div class="secret-box reveal">
+
+<button onclick="openSecret()">
+💌 رسالة سرية
+</button>
+
+<div id="secretMessage" class="secret-message">
+مهما صار… تبقين أجمل صدفة بحياتي 🌸
+</div>
+
+</div>
+
+<!-- DAYS -->
+
+<div class="days-box reveal">
+❤️ صارلنا <span id="days"></span> يوم
+</div>
+
+<button onclick="love()">
+احبج 💗
+</button>
 
 <div id="final" class="hidden">
 يمكن الدنيا كلها تتغير…  
@@ -313,6 +564,7 @@ font-size:20px;
 </div>
 
 <!-- MUSIC PLAYER -->
+
 <div class="music-player">
 
 <div class="music-info">
@@ -339,16 +591,26 @@ font-size:20px;
 
 </div>
 
-<div class="heart">🫀</div>
+<div class="heart">
+🫀
+</div>
 
 <!-- AUDIO -->
+
 <audio id="audio">
 <source src="Myflower.webm" type="audio/webm">
 </audio>
 
+<!-- ENDING -->
+
+<div class="ending" id="ending">
+شكراً لأنج مرّيتي بحياتي ✨
+</div>
+
 <script>
 
 /* ===== PASSWORD ===== */
+
 function check(){
 
 let p = document.getElementById("pass").value;
@@ -359,20 +621,15 @@ document.getElementById("login").style.opacity="0";
 
 setTimeout(()=>{
 document.getElementById("login").style.display="none";
-},500);
+},600);
 
-/* فتح التمرير */
 document.body.classList.remove("lock");
 document.body.classList.add("scroll");
 
-/* تشغيل الصوت */
 audio.volume = 1;
 
-audio.play().catch((e)=>{
-console.log(e);
-});
+audio.play().catch(()=>{});
 
-/* بدء الكتابة */
 startTyping();
 
 }
@@ -380,6 +637,7 @@ startTyping();
 }
 
 /* ===== TEXT ===== */
+
 const text = `
 يمكن مو كل مرة عرفت أتصرف صح…  
 ويمكن مرات جرحت قلبچ بدون ما أقصد.
@@ -428,19 +686,18 @@ type();
 }
 
 /* ===== LOVE EFFECT ===== */
+
 function love(){
 
 document.getElementById("final").style.display="block";
 
-/* shake */
 document.getElementById("page").style.transform="scale(1.02)";
 
 setTimeout(()=>{
 document.getElementById("page").style.transform="scale(1)";
 },200);
 
-/* hearts */
-for(let i=0;i<10;i++){
+for(let i=0;i<15;i++){
 
 let h = document.createElement("div");
 
@@ -452,9 +709,11 @@ h.style.left = Math.random()*100 + "vw";
 
 h.style.top = "80vh";
 
-h.style.fontSize = "20px";
+h.style.fontSize = "22px";
 
 h.style.animation = "float 2s linear forwards";
+
+h.style.pointerEvents = "none";
 
 document.body.appendChild(h);
 
@@ -466,7 +725,75 @@ h.remove();
 
 }
 
-/* ===== MUSIC PLAYER ===== */
+/* ===== SECRET ===== */
+
+function openSecret(){
+
+document.getElementById("secretMessage").style.display="block";
+
+}
+
+/* ===== DAYS ===== */
+
+const startDate = new Date("2025-01-01");
+
+const today = new Date();
+
+const diff = today - startDate;
+
+const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+document.getElementById("days").innerHTML = days;
+
+/* ===== TOUCH HEARTS ===== */
+
+document.addEventListener("click",(e)=>{
+
+let heart = document.createElement("div");
+
+heart.innerHTML = "💗";
+
+heart.style.position = "fixed";
+
+heart.style.left = e.clientX + "px";
+
+heart.style.top = e.clientY + "px";
+
+heart.style.fontSize = "20px";
+
+heart.style.pointerEvents = "none";
+
+heart.style.animation = "float 2s linear forwards";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},2000);
+
+});
+
+/* ===== SCROLL REVEAL ===== */
+
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll",()=>{
+
+reveals.forEach((el)=>{
+
+const top = el.getBoundingClientRect().top;
+
+if(top < window.innerHeight - 80){
+
+el.classList.add("active");
+
+}
+
+});
+
+});
+
+/* ===== MUSIC ===== */
 
 const audio = document.getElementById("audio");
 
@@ -478,7 +805,8 @@ const duration = document.getElementById("duration");
 
 const playBtn = document.getElementById("playBtn");
 
-/* format time */
+/* format */
+
 function formatTime(sec){
 
 let minutes = Math.floor(sec / 60);
@@ -493,7 +821,8 @@ return minutes + ":" + seconds;
 
 }
 
-/* update progress */
+/* update */
+
 audio.addEventListener("timeupdate",()=>{
 
 let percent = (audio.currentTime / audio.duration) * 100;
@@ -505,6 +834,7 @@ current.innerHTML = formatTime(audio.currentTime);
 });
 
 /* duration */
+
 audio.addEventListener("loadedmetadata",()=>{
 
 duration.innerHTML = formatTime(audio.duration);
@@ -512,6 +842,7 @@ duration.innerHTML = formatTime(audio.duration);
 });
 
 /* play pause */
+
 function toggleMusic(){
 
 if(audio.paused){
@@ -531,6 +862,7 @@ playBtn.innerHTML = "▶";
 }
 
 /* seek */
+
 function seek(e){
 
 const width = e.currentTarget.clientWidth;
@@ -543,10 +875,13 @@ audio.currentTime = (clickX / width) * durationValue;
 
 }
 
-/* ended */
+/* ending */
+
 audio.addEventListener("ended",()=>{
 
 playBtn.innerHTML = "▶";
+
+document.getElementById("ending").classList.add("show-ending");
 
 });
 
