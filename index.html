@@ -40,15 +40,6 @@ background:radial-gradient(circle at center, rgba(255,77,109,0.18), rgba(0,0,0,0
 z-index:-2;
 }
 
-canvas{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-1;
-}
-
 /* ===== LOGIN ===== */
 #login{
 position:fixed;
@@ -107,7 +98,7 @@ transform:scale(1.03);
 .card{
 width:92%;
 max-width:900px;
-margin:70px auto;
+margin:70px auto 25px auto;
 padding:50px;
 border-radius:35px;
 background:rgba(255,255,255,0.07);
@@ -115,6 +106,7 @@ backdrop-filter:blur(18px);
 box-shadow:0 0 60px rgba(255,77,109,0.25);
 text-align:center;
 animation:fade 1.5s ease;
+transition:0.3s;
 }
 
 @keyframes fade{
@@ -199,6 +191,92 @@ transform:translateY(-200px);
 opacity:0;
 }
 }
+
+/* ===== MUSIC PLAYER ===== */
+.music-player{
+width:92%;
+max-width:900px;
+margin:0 auto 60px auto;
+padding:20px;
+border-radius:28px;
+background:rgba(255,255,255,0.07);
+backdrop-filter:blur(18px);
+box-shadow:0 0 40px rgba(255,77,109,0.18);
+display:flex;
+align-items:center;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.music-info{
+flex:1;
+min-width:180px;
+}
+
+.song-name{
+font-size:20px;
+color:#ffe5ec;
+margin-bottom:8px;
+}
+
+.time{
+font-size:15px;
+opacity:0.75;
+}
+
+.progress-container{
+flex:2;
+height:10px;
+background:rgba(255,255,255,0.15);
+border-radius:20px;
+overflow:hidden;
+cursor:pointer;
+min-width:180px;
+}
+
+.progress{
+width:0%;
+height:100%;
+background:linear-gradient(45deg,#ff4d6d,#ff8fa3);
+border-radius:20px;
+transition:0.1s;
+}
+
+.player-btn{
+width:58px;
+height:58px;
+border:none;
+border-radius:50%;
+background:linear-gradient(45deg,#ff4d6d,#ff8fa3);
+color:white;
+font-size:22px;
+cursor:pointer;
+transition:0.3s;
+margin-top:0;
+}
+
+.player-btn:hover{
+transform:scale(1.08);
+}
+
+@media(max-width:700px){
+
+.music-player{
+padding:18px;
+gap:15px;
+}
+
+.song-name{
+font-size:18px;
+}
+
+.player-btn{
+width:52px;
+height:52px;
+font-size:20px;
+}
+
+}
 </style>
 </head>
 
@@ -234,6 +312,33 @@ opacity:0;
 
 </div>
 
+<!-- MUSIC PLAYER -->
+<div class="music-player">
+
+<div class="music-info">
+
+<div class="song-name">
+🎵 حبي الابدي
+</div>
+
+<div class="time">
+<span id="current">0:00</span>
+/
+<span id="duration">0:00</span>
+</div>
+
+</div>
+
+<div class="progress-container" onclick="seek(event)">
+<div class="progress" id="progress"></div>
+</div>
+
+<button class="player-btn" onclick="toggleMusic()" id="playBtn">
+⏸
+</button>
+
+</div>
+
 <div class="heart">🫀</div>
 
 <!-- AUDIO -->
@@ -261,8 +366,6 @@ document.body.classList.remove("lock");
 document.body.classList.add("scroll");
 
 /* تشغيل الصوت */
-const audio = document.getElementById("audio");
-
 audio.volume = 1;
 
 audio.play().catch((e)=>{
@@ -362,6 +465,90 @@ h.remove();
 }
 
 }
+
+/* ===== MUSIC PLAYER ===== */
+
+const audio = document.getElementById("audio");
+
+const progress = document.getElementById("progress");
+
+const current = document.getElementById("current");
+
+const duration = document.getElementById("duration");
+
+const playBtn = document.getElementById("playBtn");
+
+/* format time */
+function formatTime(sec){
+
+let minutes = Math.floor(sec / 60);
+
+let seconds = Math.floor(sec % 60);
+
+if(seconds < 10){
+seconds = "0" + seconds;
+}
+
+return minutes + ":" + seconds;
+
+}
+
+/* update progress */
+audio.addEventListener("timeupdate",()=>{
+
+let percent = (audio.currentTime / audio.duration) * 100;
+
+progress.style.width = percent + "%";
+
+current.innerHTML = formatTime(audio.currentTime);
+
+});
+
+/* duration */
+audio.addEventListener("loadedmetadata",()=>{
+
+duration.innerHTML = formatTime(audio.duration);
+
+});
+
+/* play pause */
+function toggleMusic(){
+
+if(audio.paused){
+
+audio.play();
+
+playBtn.innerHTML = "⏸";
+
+}else{
+
+audio.pause();
+
+playBtn.innerHTML = "▶";
+
+}
+
+}
+
+/* seek */
+function seek(e){
+
+const width = e.currentTarget.clientWidth;
+
+const clickX = e.offsetX;
+
+const durationValue = audio.duration;
+
+audio.currentTime = (clickX / width) * durationValue;
+
+}
+
+/* ended */
+audio.addEventListener("ended",()=>{
+
+playBtn.innerHTML = "▶";
+
+});
 
 </script>
 
